@@ -1,8 +1,3 @@
-# ASP.NET
-# Build and test ASP.NET projects.
-# Add steps that publish symbols, save build artifacts, deploy, and more:
-# https://docs.microsoft.com/azure/devops/pipelines/apps/aspnet/build-aspnet-4
-
 trigger:
 - main
 
@@ -32,3 +27,23 @@ steps:
   inputs:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
+
+
+- task: AzureAppServiceSettings@1
+  inputs:
+    azureSubscription: 'Azure subscription 1 (05f3eee7-1378-45df-b538-4b7aaaf881c9)'
+    appName: 'sistemalocacao'
+    resourceGroupName: 'FernandoDefault'
+    connectionStrings: |
+      "ConnectionStrings": {
+          "DefaultConnection": "Server=localhost,3306;Database=SistemaLocacao;User Id=root;Password=rakk6p4J@kYb"
+        }
+
+- task: AzureRmWebAppDeployment@4
+  inputs:
+    ConnectionType: 'AzureRM'
+    azureSubscription: 'Azure subscription 1 (05f3eee7-1378-45df-b538-4b7aaaf881c9)'
+    appType: 'webAppLinux'
+    WebAppName: 'sistemalocacao'
+    packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
+    RuntimeStack: 'DOTNETCORE|6.0'
