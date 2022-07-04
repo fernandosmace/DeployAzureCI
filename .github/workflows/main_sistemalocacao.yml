@@ -24,6 +24,10 @@ jobs:
 
       - name: Build with dotnet
         run: dotnet build --configuration Release
+        
+      - name: Install React App Dependencies
+        working-directory: ./ClienteApp/
+        run: npm Install
 
       - name: dotnet publish
         run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
