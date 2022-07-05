@@ -1,9 +1,9 @@
 var baseURL = "";
 
-if (window.location !== "localhost") {
-  baseURL = "https://sistemalocacao.azurewebsites.net";
-} else {
+if (window.location === "localhost") {
   baseURL = "https://localhost:7273";
+} else {
+  baseURL = "https://sistemalocacao.azurewebsites.net";
 }
 
 export async function getCliente(idCliente) {
