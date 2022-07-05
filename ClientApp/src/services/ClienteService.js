@@ -1,6 +1,6 @@
 var baseURL = "";
 
-if (window.location === "localhost") {
+if (window.location.hostname === "localhost") {
   baseURL = "https://localhost:7273";
 } else {
   baseURL = "https://sistemalocacao.azurewebsites.net";
